@@ -1,0 +1,1079 @@
+/* =========================================================
+   CODETRACK - GLASSMORPHISM UI
+   ========================================================= */
+
+/* ---------- Global ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(99, 102, 241, 0.35),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 90% 10%,
+      rgba(14, 165, 233, 0.3),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(168, 85, 247, 0.28),
+      transparent 40%
+    ),
+    linear-gradient(
+      135deg,
+      #07111f 0%,
+      #0b1730 45%,
+      #10152f 100%
+    );
+
+  background-attachment: fixed;
+}
+
+
+/* ---------- Main Dashboard ---------- */
+
+.dashboard {
+  min-height: 100vh;
+  padding-bottom: 60px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+
+/* ---------- Navbar ---------- */
+
+.navbar {
+  width: calc(100% - 40px);
+  max-width: 1400px;
+
+  margin: 20px auto;
+  padding: 18px 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.09);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  border-radius: 22px;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.28),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+
+  position: sticky;
+  top: 15px;
+  z-index: 100;
+}
+
+.navbar h1 {
+  margin: 0;
+
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #9bdcff
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar > div {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar span {
+  padding: 8px 14px;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+
+/* ---------- Main Content ---------- */
+
+.dashboard-content {
+  width: calc(100% - 40px);
+  max-width: 1400px;
+
+  margin: 35px auto;
+}
+
+
+/* ---------- Headings ---------- */
+
+.dashboard-content > h2 {
+  margin-top: 35px;
+  margin-bottom: 8px;
+
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+
+  letter-spacing: -1px;
+}
+
+.dashboard-content > p {
+  margin-top: 0;
+  margin-bottom: 30px;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  font-size: 17px;
+}
+
+.student-welcome-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(3, 8, 20, 0.72);
+  backdrop-filter: blur(8px);
+  animation: coding-easy-rise 0.5s ease both;
+}
+
+.student-welcome-card {
+  position: relative;
+  width: min(420px, 92vw);
+  padding: 18px;
+  text-align: center;
+  background: rgba(18, 27, 54, 0.94);
+  border: 1px solid rgba(190, 169, 255, 0.42);
+  border-radius: 22px;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+}
+
+.student-welcome-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.student-welcome-photo-frame {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f1f1f1;
+}
+
+.student-welcome-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: rotate(-90deg) scale(1.18);
+}
+
+.student-welcome-mouth {
+  position: absolute;
+  left: 61%;
+  top: 56%;
+  width: 38px;
+  height: 10px;
+  border-radius: 50%;
+  background: #471b2e;
+  animation: student-mouth-talk 0.34s ease-in-out infinite alternate;
+}
+
+.student-welcome-speech {
+  margin: 14px 0 2px;
+  color: #ffd166;
+  font-size: 26px;
+  font-weight: 800;
+  animation: coding-easy-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes student-mouth-talk {
+  from { height: 7px; transform: scaleY(0.7); }
+  to { height: 25px; transform: scaleY(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .student-welcome-overlay,
+  .student-welcome-mouth,
+  .student-welcome-speech {
+    animation: none;
+  }
+}
+
+.coding-easy-banner {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 34px;
+  padding: 12px 18px;
+  color: #f7f4ff;
+  background: rgba(124, 92, 255, 0.14);
+  border: 1px solid rgba(190, 169, 255, 0.35);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(74, 44, 145, 0.2);
+  animation: coding-easy-rise 0.7s ease both;
+}
+
+.focus-mode-status,
+.focus-mode-warning {
+  margin: 12px 0;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+#focus-task-select {
+  display: block;
+  width: min(100%, 520px);
+  margin: 12px 0;
+  padding: 12px 14px;
+  color: #ffffff;
+  background: rgba(4, 12, 28, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.focus-mode-status {
+  color: #b9f6ca;
+  background: rgba(34, 197, 94, 0.13);
+  border: 1px solid rgba(134, 239, 172, 0.3);
+}
+
+.focus-mode-warning {
+  color: #ffe6a3;
+  background: rgba(245, 158, 11, 0.14);
+  border: 1px solid rgba(253, 230, 138, 0.35);
+}
+
+.coding-easy-text {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  animation: coding-easy-pulse 2.8s ease-in-out infinite;
+}
+
+.coding-easy-spark {
+  color: #ffd166;
+  font-size: 20px;
+  animation: coding-easy-spin 3s linear infinite;
+}
+
+.coding-easy-cursor {
+  width: 2px;
+  height: 20px;
+  background: #ffd166;
+  animation: coding-easy-blink 0.9s steps(1) infinite;
+}
+
+@keyframes coding-easy-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes coding-easy-pulse {
+  0%, 100% { opacity: 0.72; }
+  50% { opacity: 1; }
+}
+
+@keyframes coding-easy-spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes coding-easy-blink {
+  50% { opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coding-easy-banner,
+  .coding-easy-text,
+  .coding-easy-spark,
+  .coding-easy-cursor {
+    animation: none;
+  }
+}
+
+
+/* =========================================================
+   GLASS CARDS
+   ========================================================= */
+
+.card,
+.section-card {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.13),
+      rgba(255, 255, 255, 0.055)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.card:hover,
+.section-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(255, 255, 255, 0.3);
+
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.32),
+    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+}
+
+
+/* ---------- Statistics ---------- */
+
+.stats {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr));
+
+  gap: 20px;
+
+  margin-bottom: 30px;
+}
+
+.card {
+  min-height: 145px;
+
+  padding: 24px;
+
+  border-radius: 22px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card h3 {
+  margin: 0 0 15px;
+
+  font-size: 17px;
+  font-weight: 600;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.card p {
+  margin: 0;
+
+  font-size: 34px;
+  font-weight: 800;
+
+  color: #ffffff;
+}
+
+
+/* ---------- Sections ---------- */
+
+.section-card {
+  margin-bottom: 25px;
+
+  padding: 30px;
+
+  border-radius: 26px;
+}
+
+.section-card h2 {
+  margin-top: 0;
+  margin-bottom: 12px;
+
+  font-size: 25px;
+  font-weight: 750;
+}
+
+.section-card > p {
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+.section-card label {
+  display: block;
+
+  margin-top: 20px;
+  margin-bottom: 8px;
+
+  font-size: 14px;
+  font-weight: 650;
+
+  color: rgba(255, 255, 255, 0.82);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  border-radius: 14px;
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  background: rgba(5, 15, 30, 0.55);
+
+  color: #ffffff;
+
+  outline: none;
+
+  font-size: 15px;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: rgba(56, 189, 248, 0.8);
+
+  box-shadow:
+    0 0 0 3px rgba(56, 189, 248, 0.12),
+    0 0 25px rgba(56, 189, 248, 0.12);
+
+  background: rgba(5, 20, 40, 0.7);
+}
+
+textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+
+/* ---------- Select ---------- */
+
+select {
+  cursor: pointer;
+}
+
+select option {
+  background: #111827;
+  color: #ffffff;
+}
+
+
+/* ---------- File Input ---------- */
+
+input[type="file"] {
+  padding: 10px;
+
+  cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+  margin-right: 12px;
+
+  padding: 9px 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: rgba(59, 130, 246, 0.8);
+
+  color: white;
+
+  cursor: pointer;
+
+  font-weight: 600;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button {
+  margin-top: 18px;
+
+  padding: 12px 20px;
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+
+  border-radius: 13px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.95),
+      rgba(99, 102, 241, 0.9)
+    );
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 20px rgba(37, 99, 235, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 28px rgba(59, 130, 246, 0.35);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+/* Navbar logout */
+
+.navbar button {
+  margin-top: 0;
+
+  padding: 9px 17px;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  box-shadow: none;
+}
+
+.navbar button:hover {
+  background: rgba(239, 68, 68, 0.75);
+
+  border-color: rgba(255, 255, 255, 0.25);
+
+  box-shadow:
+    0 8px 20px rgba(239, 68, 68, 0.2);
+}
+
+
+/* =========================================================
+   TASK / PROBLEM CARDS
+   ========================================================= */
+
+.problem {
+  margin-top: 18px;
+
+  padding: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.075);
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.problem:hover {
+  transform: translateX(4px);
+
+  background: rgba(255, 255, 255, 0.11);
+
+  border-color: rgba(255, 255, 255, 0.23);
+}
+
+.problem h3 {
+  margin: 0 0 8px;
+
+  font-size: 19px;
+}
+
+.problem p {
+  margin: 6px 0;
+
+  color: rgba(255, 255, 255, 0.68);
+}
+
+.problem button {
+  flex-shrink: 0;
+}
+
+
+/* =========================================================
+   MENTOR INFORMATION
+   ========================================================= */
+
+.mentor-info {
+  margin-top: 20px;
+
+  padding: 24px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(59, 130, 246, 0.16),
+      rgba(168, 85, 247, 0.1)
+    );
+
+  border: 1px solid rgba(96, 165, 250, 0.2);
+
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.08);
+}
+
+.mentor-info h3 {
+  margin: 0 0 10px;
+
+  font-size: 23px;
+}
+
+.mentor-info p {
+  margin: 8px 0;
+
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+   ========================================================= */
+
+.progress-bar {
+  width: 100%;
+
+  height: 16px;
+
+  margin: 20px 0;
+
+  overflow: hidden;
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.1);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  box-shadow:
+    inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.progress {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background:
+    linear-gradient(
+      90deg,
+      #38bdf8,
+      #6366f1,
+      #a855f7
+    );
+
+  box-shadow:
+    0 0 18px rgba(99, 102, 241, 0.45);
+
+  transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   TIMER
+   ========================================================= */
+
+.section-card h2:has(+ button) {
+  letter-spacing: -0.3px;
+}
+
+
+/* =========================================================
+   LOGIN / CREATE ACCOUNT
+   ========================================================= */
+
+.login-container,
+.auth-container {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+}
+
+.login-card,
+.auth-card {
+  width: 100%;
+  max-width: 470px;
+
+  padding: 40px;
+
+  border-radius: 30px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.14),
+      rgba(255, 255, 255, 0.055)
+    );
+
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
+}
+
+.login-card h1,
+.auth-card h1 {
+  text-align: center;
+
+  margin-top: 0;
+
+  font-size: 38px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ffffff,
+      #7dd3fc
+    );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.login-card h2,
+.auth-card h2 {
+  text-align: center;
+
+  margin-bottom: 30px;
+}
+
+.login-card button,
+.auth-card button {
+  width: 100%;
+}
+
+
+/* =========================================================
+   STATUS MESSAGES
+   ========================================================= */
+
+.success {
+  padding: 13px 16px;
+
+  margin: 15px 0;
+
+  border-radius: 14px;
+
+  background: rgba(34, 197, 94, 0.12);
+
+  border: 1px solid rgba(34, 197, 94, 0.25);
+
+  color: #bbf7d0;
+}
+
+.error {
+  padding: 13px 16px;
+
+  margin: 15px 0;
+
+  border-radius: 14px;
+
+  background: rgba(239, 68, 68, 0.12);
+
+  border: 1px solid rgba(239, 68, 68, 0.25);
+
+  color: #fecaca;
+}
+
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a {
+  color: #7dd3fc;
+
+  text-decoration: none;
+
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: #c4b5fd;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.35);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.55);
+}
+
+
+/* =========================================================
+   RESPONSIVE - TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .stats {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+
+  .dashboard-content {
+    width: calc(100% - 30px);
+  }
+
+  .navbar {
+    width: calc(100% - 30px);
+  }
+}
+
+
+/* =========================================================
+   RESPONSIVE - MOBILE
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+  .navbar {
+    padding: 15px 17px;
+
+    border-radius: 18px;
+
+    top: 8px;
+  }
+
+  .navbar h1 {
+    font-size: 22px;
+  }
+
+  .navbar > div {
+    gap: 7px;
+  }
+
+  .navbar span {
+    display: none;
+  }
+
+  .navbar button {
+    padding: 8px 12px;
+  }
+
+  .dashboard-content {
+    width: calc(100% - 20px);
+
+    margin-top: 25px;
+  }
+
+  .dashboard-content > h2 {
+    font-size: 29px;
+  }
+
+  .dashboard-content > p {
+    font-size: 15px;
+  }
+
+  .stats {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .card {
+    min-height: 125px;
+
+    padding: 20px;
+  }
+
+  .card p {
+    font-size: 30px;
+  }
+
+  .section-card {
+    padding: 20px;
+
+    border-radius: 21px;
+  }
+
+  .section-card h2 {
+    font-size: 21px;
+  }
+
+  .problem {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    padding: 18px;
+  }
+
+  .problem button {
+    width: 100%;
+  }
+
+  .mentor-info {
+    padding: 20px;
+  }
+
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  .login-card,
+  .auth-card {
+    padding: 28px 22px;
+
+    border-radius: 24px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .dashboard-content > h2 {
+    font-size: 25px;
+  }
+
+  .card h3 {
+    font-size: 15px;
+  }
+
+  .card p {
+    font-size: 27px;
+  }
+
+  .section-card {
+    padding: 16px;
+  }
+}
