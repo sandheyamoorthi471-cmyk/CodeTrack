@@ -1,13 +1,11 @@
 import "./App.css";
 
-import Login from "./pages/login";
-import StudentDashboard from "./pages/studentdashboard";
-import MentorDashboard from "./pages/mentordashboard";
+import Login from "./modules/auth/login";
+import StudentDashboard from "./modules/student/studentdashboard";
+import MentorDashboard from "./modules/mentor/mentordashboard";
 
 function App() {
-  const savedUser = localStorage.getItem(
-    "codetrackUser"
-  );
+  const savedUser = localStorage.getItem("codetrackUser");
 
   // Not logged in
   if (!savedUser) {

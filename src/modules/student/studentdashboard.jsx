@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import studentWelcomePhoto from "../assets/WhatsApp Image 2026-09-11 at 2.26.37 PM.jpeg";
+import studentWelcomePhoto from "../../assets/WhatsApp Image 2026-09-11 at 2.26.37 PM.jpeg";
 
 function StudentDashboard() {
   // =========================
