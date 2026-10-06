@@ -1,4 +1,8 @@
 import { useState, useEffect } from "react";
+import { fetchStudentTasks } from "../tasks/studentTasks";
+import { submitStudentProof } from "../submission/studentSubmission";
+import { fetchStudentPlatformAccounts } from "../verification/studentPlatforms";
+import { fetchStudentPoints } from "../points/studentPoints";
 function StudentDashboard() {
   // =========================
   // Get logged-in student
@@ -136,134 +140,37 @@ const [aiLoading, setAiLoading] = useState(false);
   // =========================
   // Fetch student's tasks
   // =========================
-  const fetchTasks = async () => {
-    if (!studentId) {
-      setLoadingTasks(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:5000/api/student/tasks/${studentId}`
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.error || "Failed to load tasks"
-        );
-      }
-
-      const loadedTasks = data.tasks || [];
-
-      setTasks(loadedTasks);
-
-      // Only automatically select an ACTIVE task.
-      const firstActiveTask = loadedTasks.find(
-        (task) =>
-          task.task_status !== "completed"
-      );
-
-      if (firstActiveTask) {
-        setSelectedTask(firstActiveTask);
-      } else {
-        setSelectedTask(null);
-      }
-    } catch (error) {
-      console.error(
-        "Task loading error:",
-        error
-      );
-    } finally {
-      setLoadingTasks(false);
-    }
-  };
+  const fetchTasks = () => {
+  fetchStudentTasks(
+    studentId,
+    setTasks,
+    setSelectedTask,
+    setLoadingTasks
+  );
+};
 
   // =========================
   // Fetch student's points
   // =========================
-  const fetchPoints = async () => {
-    if (!studentId) {
-      setLoadingPoints(false);
-      return;
-    }
-
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:5000/api/student/points/${studentId}`
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.error || "Failed to load points"
-        );
-      }
-
-      setTotalPoints(data.total_points || 0);
-      setVerifiedTasks(data.verified_tasks || 0);
-
-    } catch (error) {
-      console.error(
-        "Points loading error:",
-        error
-      );
-    } finally {
-      setLoadingPoints(false);
-    }
-  };
+  const fetchPoints = () => {
+  fetchStudentPoints({
+    studentId,
+    setTotalPoints,
+    setVerifiedTasks,
+    setLoadingPoints,
+  });
+};
 
   // =========================
   // Fetch platform accounts
   // =========================
-  const fetchPlatformAccounts = async () => {
-    if (!studentId) return;
-
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:5000/api/student/platforms/${studentId}`
-      );
-
-      const data = await response.json();
-
-      if (!response.ok || !data.success) {
-        throw new Error(
-          data.error ||
-            "Failed to load platform accounts"
-        );
-      }
-
-      const accounts = data.platforms || [];
-
-      setPlatformAccounts(accounts);
-
-      const urls = {
-        Codeforces: "",
-        LeetCode: "",
-      };
-
-      accounts.forEach((account) => {
-        if (
-          Object.prototype.hasOwnProperty.call(
-            urls,
-            account.platform
-          )
-        ) {
-          urls[account.platform] =
-            account.profile_url || "";
-        }
-      });
-
-      setPlatformUrls(urls);
-    } catch (error) {
-      console.error(
-        "Platform account loading error:",
-        error
-      );
-    }
-  };
+  const fetchPlatformAccounts = () => {
+  fetchStudentPlatformAccounts({
+    studentId,
+    setPlatformAccounts,
+    setPlatformUrls,
+  });
+};
 
   // =========================
   // Initial loading
@@ -496,119 +403,21 @@ const [aiLoading, setAiLoading] = useState(false);
   // =========================
   // Submit coding proof
   // =========================
-  const handleSubmitProof = async () => {
-    if (!selectedTask) {
-      alert(
-        "Please select an active task first."
-      );
-      return;
-    }
-
-    if (
-      selectedTask.task_status ===
-      "completed"
-    ) {
-      alert(
-        "This task is already completed and verified. ✅"
-      );
-      return;
-    }
-
-    if (!problemUrl.trim()) {
-      alert(
-        "Please enter the problem URL."
-      );
-      return;
-    }
-
-    setSubmitting(true);
-
-    try {
-      const formData = new FormData();
-      formData.append("task_id", selectedTask.id);
-      formData.append("student_id", studentId);
-      formData.append("answer", `${platform}: ${problemUrl}`);
-      if (screenshot) {
-        formData.append("screenshot", screenshot);
-      }
-
-      const response = await fetch(
-        "http://127.0.0.1:5000/api/submissions",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
-
-      const data = await response.json();
-
-      console.log(
-        "Submission response:",
-        data
-      );
-
-      if (
-        !response.ok ||
-        !data.success
-      ) {
-        alert(
-          "Failed to submit proof: " +
-            (data.error ||
-              data.message ||
-              "Unknown error")
-        );
-        return;
-      }
-
-      // =========================
-      // Automatic verification
-      // =========================
-
-      if (data.verified === true) {
-        alert(
-          "✅ Proof submitted and LeetCode verified successfully!\n\n" +
-            "🎉 Submission Approved!"
-        );
-      } else {
-        alert(
-          "📤 Proof submitted successfully!\n\n" +
-            "🟡 Verification pending.\n\n" +
-            (data.message ||
-              "No accepted submission found yet.")
-        );
-      }
-
-      // =========================
-      // Clear form
-      // =========================
-
-      setProblemUrl("");
-      setScreenshot(null);
-      setSelectedTask(null);
-
-      // =========================
-      // IMPORTANT:
-      // Refresh tasks and points
-      // =========================
-
-      await fetchTasks();
-      await fetchPoints();
-
-    } catch (error) {
-      console.error(
-        "Submission error:",
-        error
-      );
-
-      alert(
-        "Failed to submit proof: " +
-          error.message
-      );
-
-    } finally {
-      setSubmitting(false);
-    }
-  };
+  const handleSubmitProof = () => {
+  submitStudentProof({
+    selectedTask,
+    problemUrl,
+    platform,
+    screenshot,
+    studentId,
+    setSubmitting,
+    setProblemUrl,
+    setScreenshot,
+    setSelectedTask,
+    fetchTasks,
+    fetchPoints,
+  });
+};
 
   // =========================
   // Latest join request
