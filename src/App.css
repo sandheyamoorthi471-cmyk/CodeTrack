@@ -200,32 +200,9 @@ body {
   line-height: 1;
 }
 
-.student-welcome-photo-frame {
-  position: relative;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  border-radius: 16px;
-  background: #f1f1f1;
-}
 
-.student-welcome-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transform: rotate(-90deg) scale(1.18);
-}
 
-.student-welcome-mouth {
-  position: absolute;
-  left: 61%;
-  top: 56%;
-  width: 38px;
-  height: 10px;
-  border-radius: 50%;
-  background: #471b2e;
-  animation: student-mouth-talk 0.34s ease-in-out infinite alternate;
-}
+
 
 .student-welcome-speech {
   margin: 14px 0 2px;
@@ -235,10 +212,7 @@ body {
   animation: coding-easy-pulse 1.2s ease-in-out infinite;
 }
 
-@keyframes student-mouth-talk {
-  from { height: 7px; transform: scaleY(0.7); }
-  to { height: 25px; transform: scaleY(1); }
-}
+
 
 @media (prefers-reduced-motion: reduce) {
   .student-welcome-overlay,

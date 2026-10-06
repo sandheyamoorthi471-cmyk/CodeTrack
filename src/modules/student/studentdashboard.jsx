@@ -1,6 +1,4 @@
 import { useState, useEffect } from "react";
-import studentWelcomePhoto from "../../assets/WhatsApp Image 2026-09-11 at 2.26.37 PM.jpeg";
-
 function StudentDashboard() {
   // =========================
   // Get logged-in student
@@ -8,27 +6,7 @@ function StudentDashboard() {
   const savedUser = localStorage.getItem("codetrackUser");
   const user = savedUser ? JSON.parse(savedUser) : null;
   const studentId = user?.id;
-  const [showWelcomeAnimation, setShowWelcomeAnimation] = useState(true);
 
-  useEffect(() => {
-    const speech = window.speechSynthesis;
-    const speechTimer = window.setTimeout(() => {
-      if (speech) {
-        speech.cancel();
-        speech.speak(new SpeechSynthesisUtterance("Come on!"));
-      }
-    }, 350);
-    const closeTimer = window.setTimeout(
-      () => setShowWelcomeAnimation(false),
-      5200
-    );
-
-    return () => {
-      window.clearTimeout(speechTimer);
-      window.clearTimeout(closeTimer);
-      speech?.cancel();
-    };
-  }, []);
 
   // =========================
   // Timer
@@ -721,29 +699,7 @@ const handleAskAI = async () => {
   return (
     <div className="dashboard">
 
-      {showWelcomeAnimation && (
-        <div className="student-welcome-overlay">
-          <div className="student-welcome-card">
-            <button
-              className="student-welcome-close"
-              onClick={() => setShowWelcomeAnimation(false)}
-              aria-label="Close welcome message"
-            >
-              ×
-            </button>
-            <div className="student-welcome-photo-frame">
-              <img
-                src={studentWelcomePhoto}
-                alt="Student welcome"
-                className="student-welcome-photo"
-              />
-              <span className="student-welcome-mouth" aria-hidden="true" />
-            </div>
-            <p className="student-welcome-speech">Come on!</p>
-          </div>
-        </div>
-      )}
-
+      
       {/* =========================
           Navbar
       ========================= */}
