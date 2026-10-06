@@ -89,7 +89,7 @@ function MentorDashboard() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/mentor/groups/${mentorId}`
+        `https://codetrack-backend-9no3.onrender.com/api/mentor/groups/${mentorId}`
       );
 
       const data = await response.json();
@@ -138,7 +138,7 @@ function MentorDashboard() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/mentor/join-requests/${mentorId}`
+        `https://codetrack-backend-9no3.onrender.com/api/mentor/join-requests/${mentorId}`
       );
 
       const data = await response.json();
@@ -185,7 +185,7 @@ function MentorDashboard() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/mentor/progress/${mentorId}`
+        `https://codetrack-backend-9no3.onrender.com/api/mentor/progress/${mentorId}`
       );
 
       const data = await response.json();
@@ -240,7 +240,7 @@ function MentorDashboard() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/mentor/join-requests/${requestId}/accept`,
+        `https://codetrack-backend-9no3.onrender.com/api/mentor/join-requests/${requestId}/accept`,
         {
           method: "POST",
           headers: {
@@ -295,7 +295,7 @@ function MentorDashboard() {
     try {
 
       const response = await fetch(
-        `http://127.0.0.1:5000/api/mentor/join-requests/${requestId}/review`,
+        `https://codetrack-backend-9no3.onrender.com/api/mentor/join-requests/${requestId}/review`,
         {
           method: "PUT",
           headers: {
@@ -346,7 +346,7 @@ function MentorDashboard() {
   ) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/api/submissions/${submissionId}/review`,
+        `https://codetrack-backend-9no3.onrender.com/api/submissions/${submissionId}/review`,
         {
           method: "PUT",
           headers: {
@@ -575,7 +575,7 @@ function MentorDashboard() {
                           {problem.screenshot_url && (
                             <p>
                               <a
-                                href={`http://127.0.0.1:5000${problem.screenshot_url}`}
+                                href={`https://codetrack-backend-9no3.onrender.com${problem.screenshot_url}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >

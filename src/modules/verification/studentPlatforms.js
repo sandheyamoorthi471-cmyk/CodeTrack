@@ -7,7 +7,7 @@ export const fetchStudentPlatformAccounts = async ({
 
   try {
     const response = await fetch(
-      `http://127.0.0.1:5000/api/student/platforms/${studentId}`
+      `https://codetrack-backend-9no3.onrender.com/api/student/platforms/${studentId}`
     );
 
     const data = await response.json();

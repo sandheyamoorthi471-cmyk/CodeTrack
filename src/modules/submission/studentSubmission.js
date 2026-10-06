@@ -45,7 +45,7 @@ export const submitStudentProof = async ({
     }
 
     const response = await fetch(
-      "http://127.0.0.1:5000/api/submissions",
+      "https://codetrack-backend-9no3.onrender.com/api/submissions",
       {
         method: "POST",
         body: formData,

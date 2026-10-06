@@ -77,7 +77,7 @@ const [aiLoading, setAiLoading] = useState(false);
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/mentors"
+        "https://codetrack-backend-9no3.onrender.com/api/mentors"
       );
 
       if (!response.ok) {
@@ -117,7 +117,7 @@ const [aiLoading, setAiLoading] = useState(false);
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:5000/api/student/join-requests/${studentId}`
+        `https://codetrack-backend-9no3.onrender.com/api/student/join-requests/${studentId}`
       );
 
       const data = await response.json();
@@ -291,7 +291,7 @@ const [aiLoading, setAiLoading] = useState(false);
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/join-requests",
+        "https://codetrack-backend-9no3.onrender.com/api/join-requests",
         {
           method: "POST",
           headers: {
@@ -356,7 +356,7 @@ const [aiLoading, setAiLoading] = useState(false);
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/student/platforms",
+        "https://codetrack-backend-9no3.onrender.com/api/student/platforms",
         {
           method: "POST",
           headers: {
@@ -457,7 +457,7 @@ const handleAskAI = async () => {
 
   try {
     const response = await fetch(
-      "http://127.0.0.1:5000/api/ai/chat",
+      "https://codetrack-backend-9no3.onrender.com/api/ai/chat",
       {
         method: "POST",
         headers: {

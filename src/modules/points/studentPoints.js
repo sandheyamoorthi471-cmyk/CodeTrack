@@ -11,7 +11,7 @@ export const fetchStudentPoints = async ({
 
   try {
     const response = await fetch(
-      `http://127.0.0.1:5000/api/student/points/${studentId}`
+      `https://codetrack-backend-9no3.onrender.com/api/student/points/${studentId}`
     );
 
     const data = await response.json();

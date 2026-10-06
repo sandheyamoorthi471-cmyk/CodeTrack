@@ -36,7 +36,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/login",
+        "https://codetrack-backend-9no3.onrender.com/api/login",
         {
           method: "POST",
           headers: {
@@ -118,7 +118,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:5000/api/register",
+        "https://codetrack-backend-9no3.onrender.com/api/register",
         {
           method: "POST",
           headers: {
