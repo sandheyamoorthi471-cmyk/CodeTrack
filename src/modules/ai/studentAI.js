@@ -16,7 +16,7 @@ export const askStudentAI = async ({
 
   try {
     const response = await fetch(
-      "https://codetrack-backend-9no3.onrender.com/api/ai/chat",
+      "http://127.0.0.1:5000/api/ai/chat"
       {
         method: "POST",
         headers: {

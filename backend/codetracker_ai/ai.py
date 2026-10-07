@@ -1,8 +1,8 @@
 import requests
 
-
 OLLAMA_URL = "http://127.0.0.1:11434/api/generate"
 MODEL_NAME = "qwen2.5:3b"
+
 AI_OPTIONS = {
     "temperature": 0.3,
     "top_p": 0.9,
@@ -11,9 +11,6 @@ AI_OPTIONS = {
 
 
 def ask_codetrack_ai(prompt):
-    """
-    Send a prompt to the local CodeTrack AI model.
-    """
 
     try:
         response = requests.post(
@@ -22,10 +19,9 @@ def ask_codetrack_ai(prompt):
                 "model": MODEL_NAME,
                 "prompt": prompt,
                 "stream": False,
-                "keep_alive": "10m",
-                "options": AI_OPTIONS,
+                "options": AI_OPTIONS
             },
-            timeout=60,
+            timeout=120
         )
 
         response.raise_for_status()
@@ -34,27 +30,21 @@ def ask_codetrack_ai(prompt):
 
         return {
             "success": True,
-            "response": data.get(
-                "response",
-                "I couldn't generate a response."
-            ),
-        }
-
-    except requests.exceptions.ConnectionError:
-        return {
-            "success": False,
-            "error": (
-                "CodeTrack AI is not running. "
-                "Please make sure Ollama is running."
-            ),
+            "response": data.get("response", "")
         }
 
     except requests.exceptions.Timeout:
         return {
             "success": False,
-            "error": (
-                "CodeTrack AI took too long to respond."
-            ),
+            "error": "CodeTrack AI took too long to respond."
+        }
+
+    except requests.exceptions.RequestException as e:
+        print("Ollama API error:", e)
+
+        return {
+            "success": False,
+            "error": "CodeTrack AI could not connect to Ollama."
         }
 
     except Exception as e:
@@ -62,5 +52,5 @@ def ask_codetrack_ai(prompt):
 
         return {
             "success": False,
-            "error": str(e),
+            "error": str(e)
         }
